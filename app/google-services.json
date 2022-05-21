@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "918884787934",
+    "project_id": "fir-300a9",
+    "storage_bucket": "fir-300a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918884787934:android:40a786e7f5c55c5be9444f",
+        "android_client_info": {
+          "package_name": "com.example.ecommerceuserbatch03"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918884787934-o46u4nraulpoj44d6h0rpher6sar6ggv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwn2kOuOL8yd5HLWNpQJ0xE9s8pKnfXWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918884787934-o46u4nraulpoj44d6h0rpher6sar6ggv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918884787934:android:63ae2a14606afbc5e9444f",
+        "android_client_info": {
+          "package_name": "com.ibrahim.ecomadminbatch03"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918884787934-o46u4nraulpoj44d6h0rpher6sar6ggv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwn2kOuOL8yd5HLWNpQJ0xE9s8pKnfXWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918884787934-o46u4nraulpoj44d6h0rpher6sar6ggv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
