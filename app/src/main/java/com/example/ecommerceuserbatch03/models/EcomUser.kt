@@ -9,6 +9,6 @@ data class EcomUser(
     var phone:String?=null,
     var address:String?=null,
     var image:String? = null,
-    var isOnline:Boolean = false,
+    var online:Boolean = false,
     var lastUsageTimestamp: Long? = null,
 )

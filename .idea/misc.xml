@@ -7,9 +7,13 @@
         <entry key="..\:/EcommerceUserBatch03/app/src/main/res/drawable/custom_button.xml" value="0.143" />
         <entry key="..\:/EcommerceUserBatch03/app/src/main/res/drawable/placeholder_image.xml" value="0.143" />
         <entry key="..\:/EcommerceUserBatch03/app/src/main/res/layout/activity_main.xml" value="0.10400000000000001" />
+        <entry key="..\:/EcommerceUserBatch03/app/src/main/res/layout/drawer_header_layout.xml" value="0.1" />
         <entry key="..\:/EcommerceUserBatch03/app/src/main/res/layout/fragment_login.xml" value="0.152" />
-        <entry key="..\:/EcommerceUserBatch03/app/src/main/res/layout/fragment_product_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/EcommerceUserBatch03/app/src/main/res/layout/fragment_product_list.xml" value="0.1" />
         <entry key="..\:/EcommerceUserBatch03/app/src/main/res/layout/fragment_user.xml" value="0.25364583333333335" />
+        <entry key="..\:/EcommerceUserBatch03/app/src/main/res/layout/product_item_row.xml" value="0.2" />
+        <entry key="..\:/EcommerceUserBatch03/app/src/main/res/menu/drawer_menu.xml" value="0.1" />
+        <entry key="..\:/EcommerceUserBatch03/app/src/main/res/menu/product_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

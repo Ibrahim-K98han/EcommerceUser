@@ -13,12 +13,12 @@ import com.example.ecommerceuserbatch03.vidwmodels.LoginViewModel
 class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by activityViewModels()
-    private lateinit var binding:FragmentLoginBinding
+    private lateinit var binding: FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(inflater,container,false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         loginViewModel.authStateLD.observe(viewLifecycleOwner) {
             if (it == LoginViewModel.AuthState.AUTHENTICATED) {
                 findNavController().popBackStack()

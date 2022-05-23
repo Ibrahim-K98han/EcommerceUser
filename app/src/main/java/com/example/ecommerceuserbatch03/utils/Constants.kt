@@ -7,6 +7,7 @@ const val collectionPurchase = "Purchase"
 const val collectionCategory = "Category"
 const val collectionUser = "User"
 const val collectionOrder= "Order"
+const val collectionCart = "CartItems"
 const val collectionOrderDetails= "Order Details"
 const val collectionOrderSettings = "Order Settings"
 const val collectionOrderConstants = "OrderConstants"
@@ -22,5 +23,12 @@ class OrderStatus{
         const val pending = "Pending"
         const val delivery = "Delivery"
         const val cancelled = "Cancelled"
+    }
+}
+
+class CartAction {
+    companion object {
+        const val addToCart = "Add to Cart"
+        const val removeFromCart = "Remove from Cart"
     }
 }

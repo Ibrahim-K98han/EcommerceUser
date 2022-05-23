@@ -14,36 +14,12 @@ import com.example.ecommerceuserbatch03.utils.collectionPurchase
 class ProductRepository {
     private val db = FirebaseFirestore.getInstance()
 
-    fun addNewProduct(product: Product, purchase: Puarchase, callback: (String) -> Unit) {
-        val wb = db.batch()
-        val productDoc = db.collection(collectionProduct).document()
-        val purchaseDoc = db.collection(collectionPurchase).document()
-        product.id = productDoc.id
-        purchase.purchaseId = purchaseDoc.id
-        purchase.productId = product.id
-        wb.set(productDoc, product)
-        wb.set(purchaseDoc, purchase)
-        wb.commit().addOnSuccessListener {
-            callback("Success")
-        }.addOnFailureListener {
-            callback("Failure")
-        }
-    }
 
-    fun addRePurchase(purchase: Puarchase) {
-        val purchaseDoc = db.collection(collectionPurchase).document()
-        purchase.purchaseId = purchaseDoc.id
-        purchaseDoc.set(purchase)
-            .addOnSuccessListener {
-
-            }.addOnFailureListener {
-
-            }
-    }
 
     fun getAllProducts() : LiveData<List<Product>> {
         val productLD = MutableLiveData<List<Product>>()
         db.collection(collectionProduct)
+            .whereEqualTo("available", true)
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     return@addSnapshotListener
@@ -71,22 +47,6 @@ class ProductRepository {
         return productLD
     }
 
-    fun getPurchaseByProductId(id: String) : LiveData<List<Puarchase>> {
-        val purchaseLD = MutableLiveData<List<Puarchase>>()
-        db.collection(collectionPurchase)
-            .whereEqualTo("productId", id)
-            .addSnapshotListener { value, error ->
-                if (error != null) {
-                    return@addSnapshotListener
-                }
-                val tempList = mutableListOf<Puarchase>()
-                for (doc in value!!.documents) {
-                    doc.toObject(Puarchase::class.java)?.let { tempList.add(it) }
-                }
-                purchaseLD.value = tempList
-            }
-        return purchaseLD
-    }
 
     fun getAllCategories() : LiveData<List<String>> {
         val catLD = MutableLiveData<List<String>>()

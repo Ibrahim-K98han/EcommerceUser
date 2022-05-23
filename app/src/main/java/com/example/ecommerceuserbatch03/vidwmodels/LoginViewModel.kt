@@ -45,7 +45,7 @@ class LoginViewModel:ViewModel() {
                     emailAddress = firebaseAuth.currentUser?.email,
                     userCreationTimeStamp = firebaseAuth.currentUser?.metadata?.creationTimestamp,
                     userLastSignInTimeStamp = firebaseAuth.currentUser?.metadata?.lastSignInTimestamp,
-                    isOnline = true
+                    online = true
                 )
                 UserRepository().insertNewUser(ecomUser)
                 authStateLD.value = AuthState.AUTHENTICATED
