@@ -22,6 +22,30 @@ class UserRepository {
             }
     }
 
+    fun getUser(userId: String) : LiveData<EcomUser>{
+        val userLD = MutableLiveData<EcomUser>()
+        db.collection(collectionUser)
+            .document(userId)
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+
+                userLD.value = value!!.toObject(EcomUser::class.java)
+            }
+        return userLD
+    }
+
+    fun updateUser(ecomUser: EcomUser) {
+        db.collection(collectionUser).document(ecomUser.userId!!)
+            .set(ecomUser)
+            .addOnSuccessListener {
+
+            }.addOnFailureListener {
+
+            }
+    }
+
     fun addToCart(userId: String, cartItem: CartItem) {
         val cartDocRef = db.collection(collectionUser).document(userId)
             .collection(collectionCart).document(cartItem.productId!!)
@@ -36,6 +60,19 @@ class UserRepository {
     fun removeFromCart(userId: String, productId: String) {
         db.collection(collectionUser).document(userId)
             .collection(collectionCart).document(productId).delete()
+            .addOnSuccessListener {
+
+            }.addOnFailureListener {
+
+            }
+    }
+
+    fun updateCartItem(userId: String, productId: String, qty: Int) {
+        db.collection(collectionUser)
+            .document(userId)
+            .collection(collectionCart)
+            .document(productId)
+            .update("quantity", qty)
             .addOnSuccessListener {
 
             }.addOnFailureListener {

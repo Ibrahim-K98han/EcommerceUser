@@ -2,15 +2,15 @@ package com.example.ecommerceuserbatch03.utils
 
 const val TAG = "MadBatch03"
 const val collectionAdmin = "Admins"
-const val collectionProduct = "Product"
+const val collectionProduct = "Products"
 const val collectionPurchase = "Purchase"
-const val collectionCategory = "Category"
-const val collectionUser = "User"
-const val collectionOrder= "Order"
+const val collectionCategory = "Categories"
+const val collectionUser = "Users"
+const val collectionOrder = "Orders"
 const val collectionCart = "CartItems"
-const val collectionOrderDetails= "Order Details"
-const val collectionOrderSettings = "Order Settings"
-const val collectionOrderConstants = "OrderConstants"
+const val collectionOrderDetails = "Order Details"
+const val collectionOrderSettings = "OrderSettings"
+const val documentOrderConstants = "OrderConstants"
 
 class PaymentMethod{
     companion object{
@@ -25,7 +25,6 @@ class OrderStatus{
         const val cancelled = "Cancelled"
     }
 }
-
 class CartAction {
     companion object {
         const val addToCart = "Add to Cart"

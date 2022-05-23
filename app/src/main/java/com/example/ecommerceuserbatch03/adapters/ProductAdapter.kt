@@ -10,14 +10,16 @@ import com.example.ecommerceuserbatch03.models.CartItem
 import com.example.ecommerceuserbatch03.models.Product
 import com.example.ecommerceuserbatch03.utils.CartAction
 
-class ProductAdapter(val cartBtnAction: (String, CartItem) -> Unit) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffUtil()){
+class ProductAdapter(val cartBtnAction: (String, CartItem) -> Unit) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(
+    ProductDiffUtil()
+){
 
     class ProductViewHolder(val binding: ProductItemRowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
-            binding.product = product
-        }
-    }
+            RecyclerView.ViewHolder(binding.root) {
+                fun bind(product: Product) {
+                    binding.product = product
+                }
+            }
 
     class ProductDiffUtil : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
@@ -57,5 +59,4 @@ class ProductAdapter(val cartBtnAction: (String, CartItem) -> Unit) : ListAdapte
             cartBtnAction(action, cartItem)
         }
     }
-
 }

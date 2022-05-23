@@ -5,55 +5,52 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.ecommerceuserbatch03.databinding.FragmentCheckOutBinding
+import com.example.ecommerceuserbatch03.models.EcomUser
+import com.example.ecommerceuserbatch03.utils.PaymentMethod
+import com.example.ecommerceuserbatch03.vidwmodels.UserViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CheckOutFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CheckOutFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var binding: FragmentCheckOutBinding
+    private var paymentMethod = PaymentMethod.cod
+    private var deliveryAddress: String? = null
+    private var ecomUser: EcomUser? = null
+    private val userViewModel: UserViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_check_out, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CheckOutFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CheckOutFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        binding = FragmentCheckOutBinding.inflate(inflater, container, false)
+        binding.paymentRG.setOnCheckedChangeListener { group, checkedId ->
+            val rb: RadioButton = container!!.findViewById(checkedId)
+            paymentMethod = rb.text.toString()
+        }
+        userViewModel.getUer(userViewModel.getCurrentUserId()!!)
+            .observe(viewLifecycleOwner) {
+                ecomUser = it
+                it.address?.let { address ->
+                    deliveryAddress = address
+                    binding.deliveryAddressET.setText(address)
                 }
             }
+        binding.nextButton.setOnClickListener {
+            val address = binding.deliveryAddressET.text.toString()
+            ecomUser?.let { user ->
+                user.address = address
+                userViewModel.updateUser(user)
+                findNavController()
+                    .navigate(R.id.action_checkOutFragment_to_orderConfirmationFragment,
+                        args = bundleOf("address" to address, "payment" to paymentMethod)
+                    )
+            }
+        }
+        return binding.root
     }
+
 }

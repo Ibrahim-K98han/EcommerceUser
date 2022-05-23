@@ -1,59 +1,63 @@
 package com.example.ecommerceuserbatch03
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecommerceuserbatch03.adapters.CartItemAdapter
+import com.example.ecommerceuserbatch03.databinding.FragmentCartListBinding
+import com.example.ecommerceuserbatch03.models.CartItem
+import com.example.ecommerceuserbatch03.vidwmodels.LoginViewModel
+import com.example.ecommerceuserbatch03.vidwmodels.ProductViewModel
+import com.example.ecommerceuserbatch03.vidwmodels.UserViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CartListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CartListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentCartListBinding
+    private val userViewModel: UserViewModel by activityViewModels()
+    private val loginViewModel: LoginViewModel by activityViewModels()
+    private val productViewModel: ProductViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart_list, container, false)
+        binding = FragmentCartListBinding.inflate(inflater, container, false)
+        val adapter = CartItemAdapter {cartItem ->
+            userViewModel.updateCartItem(
+                userId = loginViewModel.firebaseAuth.currentUser?.uid!!,
+                productId = cartItem.productId!!,
+                qty = cartItem.quantity
+            )
+        }
+        binding.cartRV.layoutManager = LinearLayoutManager(requireActivity())
+        binding.cartRV.adapter = adapter
+        userViewModel.getCartItems(loginViewModel.firebaseAuth.currentUser?.uid!!)
+            .observe(viewLifecycleOwner) {
+                Log.e("CartItem", "updated", )
+                adapter.submitList(it)
+                updateTotal(it)
+            }
+        binding.checkoutBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_cartListFragment_to_checkOutFragment)
+        }
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CartListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CartListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun updateTotal(it: List<CartItem>?) {
+        var total = 0.0
+        binding.checkoutBtn.isEnabled = !it.isNullOrEmpty()
+        it?.let {
+            it.forEach {
+                total += it.quantity * it.price!!
             }
+        }
+        binding.cartTotalPriceTV.text = "Total: $total"
     }
+
 }

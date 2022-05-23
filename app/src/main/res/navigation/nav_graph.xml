@@ -19,9 +19,6 @@
             android:id="@+id/action_productListFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_productListFragment_to_cartListFragment"
-            app:destination="@id/cartListFragment" />
-        <action
             android:id="@+id/action_productListFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
     </fragment>
@@ -50,8 +47,8 @@
         android:label="fragment_check_out"
         tools:layout="@layout/fragment_check_out" >
         <action
-            android:id="@+id/action_checkOutFragment_to_orderSuccessfulMesageFragment"
-            app:destination="@id/orderSuccessfulMesageFragment" />
+            android:id="@+id/action_checkOutFragment_to_orderConfirmationFragment"
+            app:destination="@id/orderConfirmationFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderSuccessfulMesageFragment"
@@ -63,4 +60,13 @@
         android:name="com.example.ecommerceuserbatch03.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
+    <fragment
+        android:id="@+id/orderConfirmationFragment"
+        android:name="com.example.ecommerceuserbatch03.OrderConfirmationFragment"
+        android:label="fragment_order_confirmation"
+        tools:layout="@layout/fragment_order_confirmation" >
+        <action
+            android:id="@+id/action_orderConfirmationFragment_to_orderSuccessfulMesageFragment"
+            app:destination="@id/orderSuccessfulMesageFragment" />
+    </fragment>
 </navigation>
