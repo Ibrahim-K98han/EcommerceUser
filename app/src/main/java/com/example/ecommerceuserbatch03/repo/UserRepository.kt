@@ -9,6 +9,7 @@ import com.example.ecommerceuserbatch03.utils.collectionUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserRepository {
+
     val db = FirebaseFirestore.getInstance()
 
     fun insertNewUser(ecomUser: EcomUser) {

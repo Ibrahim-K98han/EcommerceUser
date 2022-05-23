@@ -14,8 +14,6 @@ import com.example.ecommerceuserbatch03.utils.collectionPurchase
 class ProductRepository {
     private val db = FirebaseFirestore.getInstance()
 
-
-
     fun getAllProducts() : LiveData<List<Product>> {
         val productLD = MutableLiveData<List<Product>>()
         db.collection(collectionProduct)

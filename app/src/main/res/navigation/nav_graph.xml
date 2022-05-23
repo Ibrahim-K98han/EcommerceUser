@@ -19,12 +19,6 @@
             android:id="@+id/action_productListFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_productListFragment_to_userOrderListFragment"
-            app:destination="@id/userOrderListFragment" />
-        <action
-            android:id="@+id/action_productListFragment_to_userFragment"
-            app:destination="@id/userFragment" />
-        <action
             android:id="@+id/action_productListFragment_to_cartListFragment"
             app:destination="@id/cartListFragment" />
         <action
@@ -34,7 +28,7 @@
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.ecommerceuserbatch03.UserFragment"
-        android:label="fragment_user"
+        android:label="My Profile"
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/userOrderListFragment"

@@ -47,14 +47,16 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:padding="4dp"/>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/productRowCartBtn"
                 android:layout_gravity="end"
                 android:text="add to cart"
-                app:backgroundTint="@color/teal_200"
-                android:textColor="@color/black"/>
+                android:layout_marginRight="5dp"
+                android:padding="5dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
